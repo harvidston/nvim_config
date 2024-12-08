@@ -13,19 +13,21 @@ local packer_bootstrap = ensure_packer()
 --vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)	
-  use "ellisonleao/gruvbox.nvim"
+ -- use "ellisonleao/gruvbox.nvim"
+  use 'ThePrimeagen/vim-be-good'
+  use "rebelot/kanagawa.nvim"
   use 'sainnhe/gruvbox-material'
   use 'wbthomason/packer.nvim'
-  use 'theprimeagen/harpoon'
+  --use 'theprimeagen/harpoon'
   use 'nvim-tree/nvim-tree.lua'
   use 'nvim-tree/nvim-web-devicons'
   use 'nvim-lualine/lualine.nvim'
   use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
  -- use 'nvim-treesitter/nvim-treesitter'
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.1',
+	  'nvim-telescope/telescope.nvim', tag = '0.1.4',
 	  -- or                            , branch = '0.1.x',
-	  requires = { {'nvim-lua/plenary.nvim'} } 
+	  requires = { {'nvim-lua/plenary.nvim'} }
   }
   --Completion
   use 'hrsh7th/nvim-cmp'
@@ -51,6 +53,7 @@ return require('packer').startup(function(use)
   use 'styled-components/vim-styled-components'
  -- use 'leafgarland/typescript-vim'
   --use 'peitalin/vim-jsx-typescript'
+  use {"windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {} end}
 
   if packer_bootstrap then 
 	  require('packer').sync()
