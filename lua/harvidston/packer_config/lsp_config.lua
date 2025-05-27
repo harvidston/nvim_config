@@ -1,6 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "pyright", "lua_ls", "tsserver", "cssls", "html" }
+	ensure_installed = { "pyright", "lua_ls", "ts_ls", "cssls", "html" }
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -46,7 +46,7 @@ require("lspconfig").pyright.setup {
   on_attach = on_attach,
 }
 
-require("lspconfig").tsserver.setup {
+require("lspconfig").ts_ls.setup {
   capabilities = capabilities,
 }
 
