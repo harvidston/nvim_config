@@ -20,6 +20,7 @@ local function map(mode, lhs, rhs, opts)
 end
 
 map('i', 'kk', '<Esc>')
+map('i', 'лл', '<Esc>')
 map('n', '<leader>s', ':w<CR>')
 -- Easy select all of file
 map('n', '<leader>sa', 'ggVG<c-$>')
@@ -27,3 +28,5 @@ map('n', 'L', 'A')
 map('n', 'H', 'I')
 map('n', 'F', 'G')
 map('n', 'ff', 'gg')
+map('v', 'F', 'G')
+map('v', 'ff', 'gg')
