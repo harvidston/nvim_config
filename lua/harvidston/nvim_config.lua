@@ -19,14 +19,23 @@ local function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+-- Exit from input mode
 map('i', 'kk', '<Esc>')
 map('i', 'лл', '<Esc>')
+-- Save file changes
 map('n', '<leader>s', ':w<CR>')
+map('n', '<leader>ы', ':w<CR>')
 -- Easy select all of file
 map('n', '<leader>sa', 'ggVG<c-$>')
+-- Move cursor to the end of the line
 map('n', 'L', 'A')
+map('n', 'Д', 'A')
+-- Move cursor to the begining of the line
 map('n', 'H', 'I')
+map('n', 'Р', 'I')
+-- Move cursor to the end of the file
 map('n', 'F', 'G')
-map('n', 'ff', 'gg')
 map('v', 'F', 'G')
+-- Move cursor to the begining of the file
+map('n', 'ff', 'gg')
 map('v', 'ff', 'gg')
