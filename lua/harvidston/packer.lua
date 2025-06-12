@@ -10,52 +10,60 @@ local ensure_packer = function()
 end
 
 local packer_bootstrap = ensure_packer()
---vim.cmd [[packadd packer.nvim]]
 
-return require('packer').startup(function(use)	
- -- use "ellisonleao/gruvbox.nvim"
-  use 'ThePrimeagen/vim-be-good'
-  use "rebelot/kanagawa.nvim"
+return require('packer').startup(function(use)
+  -- Цветовые схемы и интерфейс
+  use 'rebelot/kanagawa.nvim'
   use 'sainnhe/gruvbox-material'
   use 'wbthomason/packer.nvim'
-  --use 'theprimeagen/harpoon'
+
+  -- Файловый менеджер, иконки, статус-бар, вкладки
   use 'nvim-tree/nvim-tree.lua'
   use 'nvim-tree/nvim-web-devicons'
   use 'nvim-lualine/lualine.nvim'
   use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
- -- use 'nvim-treesitter/nvim-treesitter'
+
+  -- Telescope — мощный поиск
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.4',
-	  -- or                            , branch = '0.1.x',
-	  requires = { {'nvim-lua/plenary.nvim'} }
+    'nvim-telescope/telescope.nvim', tag = '0.1.4',
+    requires = { {'nvim-lua/plenary.nvim'} }
   }
-  --Completion
+
+  -- Treesitter — улучшенная подсветка и анализ кода
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
+
+  -- LSP и автодополнение
+  use 'williamboman/mason.nvim'           -- установка LSP серверов
+  use 'williamboman/mason-lspconfig.nvim' -- интеграция mason и lspconfig
+  use 'neovim/nvim-lspconfig'             -- конфигурирование LSP
+  use 'glepnir/lspsaga.nvim'              -- UI для LSP (фичи, дефы, ховеры)
+
+  -- Completion (автодополнение)
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
-  use "rafamadriz/friendly-snippets"
+  use "rafamadriz/friendly-snippets"      -- готовые сниппеты для разных языков
 
-  --LSP configurations
-  use "williamboman/mason.nvim"
-  use "neovim/nvim-lspconfig"
-  use "williamboman/mason-lspconfig.nvim"
-  use "glepnir/lspsaga.nvim"
-
-
-  --Frontend config 
-  --use 'prettier/vim-prettier'
---  use 'maxmellon/vim-jsx-pretty'
-
---  use 'nvim-treesitter/playground'
+  -- Линтинг и форматирование через null-ls
   use 'jose-elias-alvarez/null-ls.nvim'
-  use 'MunifTanjim/prettier.nvim'
-  use 'styled-components/vim-styled-components'
- -- use 'leafgarland/typescript-vim'
-  --use 'peitalin/vim-jsx-typescript'
-  use {"windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {} end}
+  use 'MunifTanjim/prettier.nvim'          -- prettier для фронтенда
 
-  if packer_bootstrap then 
-	  require('packer').sync()
-  end 
+  use {"windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {} end} --автозакрытие скобок
+  use {
+    'folke/which-key.nvim',                 -- подсказки по шорткатам
+    config = function()
+      require("which-key").setup {}
+    end
+  }
+
+  use 'lewis6991/gitsigns.nvim'
+
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)
+

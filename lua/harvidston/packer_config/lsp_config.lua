@@ -1,26 +1,38 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "pyright", "lua_ls", "ts_ls", "cssls", "html" }
+  ensure_installed = { "pyright", "lua_ls", "ts_ls", "cssls", "html" }
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-require('lspsaga').setup({
-  code_action_icon = "💡",
-    symbol_in_winbar = {
-    in_custom = false,
-    enable = true,
-    separator = ' ',
-    show_file = true,
-    file_formatter = ""
+-- Добавляем поддержку расширенных codeAction kinds
+capabilities.textDocument.codeAction = {
+  dynamicRegistration = true,
+  codeActionLiteralSupport = {
+    codeActionKind = {
+      valueSet = {
+        "",
+        "quickfix",
+        "refactor",
+        "refactor.extract",
+        "refactor.inline",
+        "refactor.rewrite",
+        "source",
+        "source.organizeImports",
+        "source.fixAll",
+      },
+    },
   },
-})
+}
 
-local on_attach = function(_,_)
- vim.keymap.set("n", "gd", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
- vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<cr>', { silent = true })
- vim.keymap.set({"n","v"}, "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true })
- vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { silent = true })
+local on_attach = function(client, bufnr)
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  -- Здесь можно добавить обычные LSP-ключи без lspsaga
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+  vim.keymap.set({"n","v"}, "<leader>ca", vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
+  -- Добавь другие нужные mappings
 end
 
 require("lspconfig").lua_ls.setup {
@@ -48,12 +60,16 @@ require("lspconfig").pyright.setup {
 
 require("lspconfig").ts_ls.setup {
   capabilities = capabilities,
+  on_attach = on_attach,
 }
 
 require("lspconfig").html.setup {
   capabilities = capabilities,
+  on_attach = on_attach,
 }
 
 require("lspconfig").cssls.setup {
-	capabilities = capabilities,
+  capabilities = capabilities,
+  on_attach = on_attach,
 }
+
