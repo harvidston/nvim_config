@@ -27,15 +27,19 @@ map('n', '<leader>s', ':w<CR>')
 map('n', '<leader>ы', ':w<CR>')
 -- Easy select all of file
 map('n', '<leader>sa', 'ggVG<c-$>')
+map('n', '<leader>ыф', 'ggVG<c-$>')
 -- Move cursor to the end of the line
+map('n', ';', '$')
+map('n', 'ж', '$')
+map('v', ';', '$')
+map('v', 'ж', '$')
+-- Move cursor to the end of the line to insert
 map('n', 'L', 'A')
+map('v', 'L', 'A')
 map('n', 'Д', 'A')
--- Move cursor to the begining of the line
+map('v', 'Д', 'A')
+-- Move cursor to the begining of the line to insert
 map('n', 'H', 'I')
+map('v', 'H', 'I')
 map('n', 'Р', 'I')
--- Move cursor to the end of the file
-map('n', 'F', 'G')
-map('v', 'F', 'G')
--- Move cursor to the begining of the file
-map('n', 'ff', 'gg')
-map('v', 'ff', 'gg')
+map('v', 'Р', 'I')

@@ -3,6 +3,7 @@ local opts = { noremap = true, silent = true }
 
 -- Move to previous/next
 map('n', '<leader>`', '<Cmd>BufferPrevious<CR>', opts)
+map('n', '<leader>ё', '<Cmd>BufferPrevious<CR>', opts)
 map('n', '<leader><Tab>', '<Cmd>BufferNext<CR>', opts)
 -- Re-order to previous/next
 map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
